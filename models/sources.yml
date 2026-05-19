@@ -1,0 +1,42 @@
+version: 2
+
+sources:
+  - name: raw_data
+    database: sin_dev
+    schema: raw_data
+    tables:
+      - name: s_customers
+        description: Raw customer records from the `raw_data` schema.
+        columns:
+          - name: customer_id
+            description: Unique identifier for the customer.
+            data_tests:
+              - unique
+              - not_null
+          - name: customer_name
+            description: Full name of the customer.
+          - name: email
+            description: Email address associated with the customer.
+          - name: signup_timestamp
+            description: Timestamp when the customer signed up.
+            data_tests:
+              - not_null
+
+      - name: s_orders
+        description: Raw order records from the `raw_data` schema.
+        columns:
+          - name: order_id
+            description: Unique identifier for the order.
+            data_tests:
+              - unique
+              - not_null
+          - name: order_number
+            description: Business-facing order number.
+          - name: customer_id
+            description: Identifier for the customer who placed the order.
+            data_tests:
+              - not_null
+          - name: order_timestamp
+            description: Timestamp when the order was placed.
+            data_tests:
+              - not_null
