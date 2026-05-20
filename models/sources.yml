@@ -24,6 +24,8 @@ sources:
 
       - name: s_orders
         description: Raw order records from the `raw_data` schema.
+        config:
+          event_time: order_timestamp
         columns:
           - name: order_id
             description: Unique identifier for the order.
@@ -39,4 +41,8 @@ sources:
           - name: order_timestamp
             description: Timestamp when the order was placed.
             data_tests:
+              - not_null
+          - name: process_timestamp
+            description: Timestamp when the order data is ingested 
+            data_tests: 
               - not_null
