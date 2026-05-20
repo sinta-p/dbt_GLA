@@ -20,4 +20,4 @@ from {{ source('raw_data', 's_orders') }}
 
 -- 2 scenarios for pass 
 -- first: making sure that it works on first load (PASS)
--- second: making sure that it works if backfill is happening midway  
+-- second: making sure that it works if backfill is happening midway  (PASS)
