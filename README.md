@@ -6,7 +6,7 @@
 
 ### Solution: 
 To alter the behavior of incremental microbatch to be more simliar to normal incremental where a retry will symbolise that every previous missed runs have been correctly updated as well.
-To do so there is a need to have a dynamic lookback. Logic of dynamic lookback can be found in /macros/get_dynamiclookback.sql. 
+To do so there is a need to have a dynamic lookback. Logic of dynamic lookback can be found in `/macros/get_dynamiclookback.sql`. 
 However, the macro implementation will not work as there is a constraint on dbt where setting config does not allow for introspective queries. 
 Hence to enable a true dynamic lookback, there is a need to make use of an external orchestrator with lookback set as a variable. 
 ![solution1](assets/images/inc_microbatch_retry_fix.png) 
@@ -16,7 +16,7 @@ Hence to enable a true dynamic lookback, there is a need to make use of an exter
 When new models are introduced, the initial load is very heavy due to all the pre-existing data. How do we efficiently set cut-off date to allow the model to be fresh while backfill can happen at a separate timeline. 
 
 ### Solution: 
-This can be achieved by manipulation of `begin` field with a macro found in /macro/get_begin_date.sql. This can ensure the following: 
+This can be achieved by manipulation of `begin` field with a macro found in `/macro/get_begin_date.sql`. This can ensure the following: 
 1. First load without any additional parameter will simply bring in data from the last fixed lookback period.
 2. Even if backfill is in progress, manipulation of begin data will not wipe any of the backfill information. 
 
