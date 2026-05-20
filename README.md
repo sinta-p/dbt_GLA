@@ -19,3 +19,13 @@ When new models are introduced, the initial load is very heavy due to all the pr
 This can be achieved by manipulation of `begin` field with a macro found in /macro/get_begin_date.sql. This can ensure the following: 
 1. First load without any additional parameter will simply bring in data from the last fixed lookback period.
 2. Even if backfill is in progress, manipulation of begin data will not wipe any of the backfill information. 
+
+## Use-case 3: Using SAO to do cross-project model dependency 
+### Problem: 
+When using job chaining across project, we are more reliant on job dependency rather than model dependency. Hence, 
+![problem3](assets/images/cross_project_model_dep_issue.png) 
+
+### Solution: 
+1. Simply bring everything back into a single dbt project will resolve this issue.
+2. However, if there is a need to maintain multiple dbt project, we can make use of SAO + staging test to resolve it.
+3. Alternatively, there is a possibility of using webhook and a separate function to run. 
