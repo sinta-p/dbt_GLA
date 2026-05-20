@@ -34,3 +34,12 @@ The failure in project A could be caused by 2 scenario:
 - data not updated due to upstream failure or sql failed to run -> SAO will automatically detect that there is no data change and skip the model 
 - data updated but failed data test -> there is a need for stg model to do data test to make sure that wrong data doesnt get populated 
 4. Alternatively, there is a possibility of using webhook + Admin API + a separate function to run. 
+
+## Use-case 4: CI Job for job pooling  
+### Problem: 
+Today dbt orchestration does not allow multiple runs at the same time for a job causing an issue if there are any parallelism expected (be it multiple user or custom-partitioning transformation  ). 
+
+### Solution: 
+Interestingly, CI job does not have that limitation. Hence we can simply create a job pool and run parallel jobs on it.
+![solution4](assets/images/ci_job.png) 
+
