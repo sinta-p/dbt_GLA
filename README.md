@@ -22,10 +22,15 @@ This can be achieved by manipulation of `begin` field with a macro found in /mac
 
 ## Use-case 3: Using SAO to do cross-project model dependency 
 ### Problem: 
-When using job chaining across project, we are more reliant on job dependency rather than model dependency. Hence, 
+When using job chaining across project, we are more reliant on job dependency rather than model dependency. Hence,this might cause model to be delayed due to an overall job failure.  
 ![problem3](assets/images/cross_project_model_dep_issue.png) 
 
 ### Solution: 
 1. Simply bring everything back into a single dbt project will resolve this issue.
-2. However, if there is a need to maintain multiple dbt project, we can make use of SAO + staging test to resolve it.
-3. Alternatively, there is a possibility of using webhook and a separate function to run. 
+2. Breakdown the job to different segments however this might cause an increase in the number of job
+3. However, if there is a need to maintain multiple dbt project, we can make use of SAO + staging test to resolve it. 
+![solution3](assets/images/cross_project_model_dep_fix.png) 
+The failure in project A could be caused by 2 scenario: 
+- data not updated due to upstream failure or sql failed to run -> SAO will automatically detect that there is no data change and skip the model 
+- data updated but failed data test -> there is a need for stg model to do data test to make sure that wrong data doesnt get populated 
+4. Alternatively, there is a possibility of using webhook + Admin API + a separate function to run. 
