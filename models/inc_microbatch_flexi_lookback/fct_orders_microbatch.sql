@@ -29,6 +29,8 @@ select
     order_id,
     order_number,
     customer_id,
+    country,
+    transaction_amt,
     order_timestamp,
     process_timestamp
 from {{ source('raw_data', 's_orders') }}
