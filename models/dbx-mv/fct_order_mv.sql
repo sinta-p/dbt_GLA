@@ -4,7 +4,7 @@
 
 version: 1.1
 source: {{ ref('fct_orders_microbatch') }}
-filter: order_date >= DATE'2026-04-02'
+filter: order_timestamp >= DATE'2026-04-02'
 
 fields:
   - name: order_number
@@ -18,4 +18,4 @@ measures:
   - name: total_revenue
     expr: SUM(transaction_amt)
   - name: customer_count
-    expr: COUNT(DISTINCT cistomer_id)
+    expr: COUNT(DISTINCT customer_id)
